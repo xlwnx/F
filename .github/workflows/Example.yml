@@ -15,3 +15,26 @@ jobs:
     - name: Install Python
       run: |
         sudo df -hT
+
+    - name: Run partition combination script
+      run: |
+          # Cek status partisi
+          df -h
+
+          # Cek mount point
+          mount | grep /mnt
+
+          # Unmount /mnt jika sudah ter-mount
+          sudo umount /mnt || true
+
+          # Pastikan direktori /mnt kosong
+          sudo rm -rf /mnt/*
+
+          # Mount ulang jika perlu
+          sudo mount --bind / /mnt
+
+          # Cek hasil mount
+          df -h
+          mount | grep /mnt
+
+          df -hT
