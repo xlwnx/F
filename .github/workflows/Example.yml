@@ -15,7 +15,7 @@ jobs:
     - name: Install Python
       run: |
         lsblk
-        sudo df -hT
+        
 
     - name: Run partition combination script
       run: |
