@@ -19,7 +19,8 @@ jobs:
       - name: Display lsblk (Block Devices)
         run: |
           echo "Listing block devices with lsblk:"
-          lsblk
+          sudo mkdir /mnt/l
+          sudo mount /dev/sdc1 /mnt/l
 
       - name: Display Number of CPU Cores
         run: |
