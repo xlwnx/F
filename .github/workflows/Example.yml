@@ -1,41 +1,32 @@
-name: Install Python
+name: System Information
 
 on:
-  workflow_dispatch:
-    
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  install:
+  system_info:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Install Python
-      run: |
-       sudo lsblk
-        
+      - name: Display lsblk (Block Devices)
+        run: |
+          echo "Listing block devices with lsblk:"
+          lsblk
 
-    - name: Run partition combination script
-      run: |
-          # Cek status partisi
-          df -h
+      - name: Display Number of CPU Cores
+        run: |
+          echo "Number of CPU cores:"
+          nproc
 
-          # Cek mount point
-          mount | grep /mnt
-
-          # Unmount /mnt jika sudah ter-mount
-          sudo umount /mnt || true
-
-          # Pastikan direktori /mnt kosong
-          sudo rm -rf /mnt/*
-
-          # Mount ulang jika perlu
-          sudo mount --bind / /mnt
-
-          # Cek hasil mount
-          df -h
-          mount | grep /mnt
-
-          df -hT
+      - name: Display Memory Usage
+        run: |
+          echo "Displaying memory usage with free -h:"
+          free -h
